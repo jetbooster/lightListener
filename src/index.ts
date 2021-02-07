@@ -1,8 +1,9 @@
 import { Control, Discovery, Client } from 'magic-home';
 import { connect } from 'mqtt';
 import { config } from 'dotenv';
+import { join } from 'path';
 
-config();
+config({ path: join(__dirname, './.env') });
 
 const { MQTT_PASSWORD } = process.env;
 
