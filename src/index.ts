@@ -72,6 +72,7 @@ const main = async () => {
       if (lightConfig.config.type === 'mono') {
         const col = lightConfig.config.channel;
         const val = Number(msg);
+        console.log({ val });
         if (val === Number.NaN || !(typeof val === 'number')) {
           throw Error('Invalid MQTT message for mono light. 1 element required');
         }
