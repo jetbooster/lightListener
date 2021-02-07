@@ -31,8 +31,10 @@ declare module 'magic-home' {
     turnOff(cb:callback)
 
     setColorAndWarmWhite(red:number, green:number, blue:number, ww:number, cb:callback)
+    setColorAndWarmWhite(red:number, green:number, blue:number, ww:number): Promise<any>
 
     setColorAndWhites(red:number, green:number, blue:number, ww:number, cw:number, cb:callback)
+    setColorAndWhites(red:number, green:number, blue:number, ww:number, cw:number): Promise<any>
 
     setColor(red:number, green:number, blue:number, cb:callback)
     setColor(red:number, green:number, blue:number): Promise<any>
@@ -40,6 +42,7 @@ declare module 'magic-home' {
     setWarmWhite(red:number, green:number, blue:number, ww:number, cw:number, cb:callback)
 
     setWhites(ww:number, cw:number, cb:callback)
+    setWhites(ww:number, cw:number): Promise<any>
 
     setColorWithBrightness(red:number, green:number, blue:number, brightness:number, cb:callback)
 
@@ -57,7 +60,7 @@ declare module 'magic-home' {
   declare interface Client {
     address:string,
     id: string,
-    model:string
+    model:string,
   }
 
   declare class Discovery {
