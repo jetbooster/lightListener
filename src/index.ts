@@ -72,7 +72,7 @@ const main = async () => {
       if (lightConfig.config.type === 'mono') {
         const col = lightConfig.config.channel;
         const val = Number(msg);
-        if (!val) {
+        if (val === Number.NaN || !(typeof val === 'number')) {
           throw Error('Invalid MQTT message for mono light. 1 element required');
         }
         switch (col) {
@@ -101,7 +101,7 @@ const main = async () => {
           }
         }
       } else if (lightConfig.config.type === 'colourW') {
-        const elems = msg.split(',').map(Number).filter(Boolean);
+        const elems = msg.split(',').map(Number).filter((num) => ((num === Number.NaN) || typeof num !== 'number'));
         if (elems.length !== 4) {
           throw Error('Invalid MQTT message for cool white light. 4 elements required');
         }
@@ -110,7 +110,7 @@ const main = async () => {
         );
       } else if (lightConfig.config.type === 'colourWWCW') {
         // split on , then filter any values which don't parse as numbers
-        const elems = msg.split(',').map(Number).filter(Boolean);
+        const elems = msg.split(',').map(Number).filter((num) => ((num === Number.NaN) || typeof num !== 'number'));
         if (elems.length !== 5) {
           throw Error('Invalid MQTT message for cool white light. 5 elements required');
         }
