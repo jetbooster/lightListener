@@ -12,8 +12,8 @@ declare module 'magic-home' {
     ack?: ack;
     log_all_received?: boolean;
     apply_masks?: boolean;
-    connect_timeout?: number;
-    command_timeout?: number;
+    connect_timeout?: number|null;
+    command_timeout?: number|null;
     cold_white_support?: boolean;
   }
 

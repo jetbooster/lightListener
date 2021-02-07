@@ -24,10 +24,10 @@ const main = async () => {
   const clients = await Discovery.scan();
 
   const officeLight = getLight(clients, 'office');
-  const light = new Control(officeLight.address);
+  const light = new Control(officeLight.address, { command_timeout: null });
   let result = await light.setColor(0, 0, 0);
   console.log(result);
-  wait(1000);
+  await wait(5000);
   result = await light.setColor(255, 255, 255);
   console.log(result);
 };
