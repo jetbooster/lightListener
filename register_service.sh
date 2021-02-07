@@ -7,7 +7,7 @@ if [[ -s /etc/systemd/system/lightListener.service]]; then
   exit 1;
 fi
 
-cat <<EOF > /etc/systemd/system/lightListener.service
+sudo bash -c 'cat <<EOF > /etc/systemd/system/lightListener.service
 [Unit]
 Description=Light Listener Service
 After=mosquitto.service
@@ -21,7 +21,7 @@ ExecStart=/usr/local/bin/node /home/pi/lightListener/dist/index.js
 
 [Install]
 WantedBy=multi-user.target
-EOF
+EOF'
 
-systemctl start lightListener
-systemctl enable lightListener
+sudo systemctl start lightListener
+sudo systemctl enable lightListener
