@@ -1,7 +1,15 @@
 import { Control, Discovery, Client } from 'magic-home';
 import { connect } from 'mqtt';
+import { config } from 'dotenv';
+
+config();
 
 const { MQTT_PASSWORD } = process.env;
+
+if (!MQTT_PASSWORD) {
+  throw Error('MQTT_PASSWORD required. Provide through .env file or env vars');
+}
+
 const MQTT_USERNAME = 'jetbooster';
 const MQTT_HOST = 'raspberrypi';
 
