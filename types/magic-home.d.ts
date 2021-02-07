@@ -60,10 +60,13 @@ declare module 'magic-home' {
   }
 
   declare class Discovery {
-    static scan(timeout:number)
+    static scan(timeout?:number): Promise<client[]>
+    static scan(timeout: number, cb:callback<client[]>): void
+    static scan(cb:callback<client[]>): void
     constructor()
-    scan(timeout?:number,cb?:callback)
-    scan(cb?:callback)
+    scan(cb:callback<client[]>):void
+    scan(timeout:number,cb:callback<client[]>): void
+    scan(timeout?:number): void
     declare const clients:client[]
     declare const scanned: boolean
   }
