@@ -1,15 +1,7 @@
-import { importable } from './import';
+import { Control, Discovery } from 'magic-home';
 
-export const imported = importable;
-
-export interface myInterface {
-  a: boolean;
-  b: string
-}
-
-export const c: myInterface = {
-  a: false,
-  b: '',
+const main = async () => {
+  const disc = await Discovery.scan(10000);
+  console.log(disc);
 };
-
-export default {};
+main();
