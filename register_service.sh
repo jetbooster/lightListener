@@ -2,7 +2,7 @@
 
 npx tsc
 
-if [[ -s /etc/systemd/system/lightListener.service]]; then
+if [[ -s /etc/systemd/system/lightListener.service ]]; then
   echo 'service already exists';
   exit 1;
 fi
