@@ -47,13 +47,19 @@ const main = async () => {
   const clients = await Discovery.scan();
   const mqttClient = connect(`mqtt://${MQTT_USERNAME}:${MQTT_PASSWORD}@${MQTT_HOST}`);
   mqttClient.on('connect', () => {
+    console.log('connected to MQTT');
     Object.keys(lights).forEach((light) => {
       mqttClient.subscribe(`lightControl/${light}`, (err) => {
         if (err) {
           throw err;
         }
+        console.log(`subscribed to lightControl/${light}`);
       });
     });
+  });
+
+  mqttClient.on('error', (err) => {
+    console.error(err);
   });
 
   mqttClient.on('message', async (topic, message) => {
