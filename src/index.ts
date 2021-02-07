@@ -3,7 +3,7 @@ import { connect } from 'mqtt';
 import { config } from 'dotenv';
 import { join } from 'path';
 
-config({ path: join(__dirname, './.env') });
+config({ path: join(__dirname, '../.env') });
 
 const { MQTT_PASSWORD } = process.env;
 
