@@ -25,8 +25,14 @@ const main = async () => {
 
   const officeLight = getLight(clients, 'office');
   const light = new Control(officeLight.address);
-  const result = await light.setColor(0, 0, 0);
+  let result = await light.setColor(0, 0, 0);
+  console.log(result);
   wait(1000);
-  const result = await light.setColor(255, 255, 255);
+  result = await light.setColor(255, 255, 255);
+  console.log(result);
 };
-main();
+try {
+  main();
+} catch (e) {
+  console.log(e);
+}
