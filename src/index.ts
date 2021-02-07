@@ -5,8 +5,6 @@ const { MQTT_PASSWORD } = process.env;
 const MQTT_USERNAME = 'jetbooster';
 const MQTT_HOST = 'raspberrypi';
 
-const wait = async (millis:number) => new Promise((res) => setTimeout(res, millis));
-
 interface LightConfig {
   id: string,
   type: 'mono'|'color'|'colourW'|'colourWWCW',
