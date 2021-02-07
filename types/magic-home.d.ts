@@ -35,6 +35,7 @@ declare module 'magic-home' {
     setColorAndWhites(red:number, green:number, blue:number, ww:number, cw:number, cb:callback)
 
     setColor(red:number, green:number, blue:number, cb:callback)
+    setColor(red:number, green:number, blue:number): Promise<any>
 
     setWarmWhite(red:number, green:number, blue:number, ww:number, cw:number, cb:callback)
 
@@ -53,21 +54,21 @@ declare module 'magic-home' {
     startEffectMode(cb:callback)
   }
 
-  declare interface client {
+  declare interface Client {
     address:string,
     id: string,
     model:string
   }
 
   declare class Discovery {
-    static scan(timeout?:number): Promise<client[]>
-    static scan(timeout: number, cb:callback<client[]>): void
-    static scan(cb:callback<client[]>): void
+    static scan(timeout?:number): Promise<Client[]>
+    static scan(timeout: number, cb:callback<Client[]>): void
+    static scan(cb:callback<Client[]>): void
     constructor()
-    scan(cb:callback<client[]>):void
-    scan(timeout:number,cb:callback<client[]>): void
+    scan(cb:callback<Client[]>):void
+    scan(timeout:number,cb:callback<Client[]>): void
     scan(timeout?:number): void
-    declare const clients:client[]
+    declare const clients:Client[]
     declare const scanned: boolean
   }
 
