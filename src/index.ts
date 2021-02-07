@@ -64,6 +64,7 @@ const main = async () => {
 
   mqttClient.on('message', async (topic, message) => {
     const msg = message.toString();
+    console.log({ msg, topic });
     const lightName = topic.split('/')[1];
     const lightConfig = getLight(clients, lightName);
     const light = new Control(lightConfig.address, { command_timeout: null });
