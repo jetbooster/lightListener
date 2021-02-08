@@ -43,7 +43,7 @@ const lights:Lights = {
 const getLight = (clients:Client[], name:string):LightWithConfig => {
   const light = clients.find((client) => client.id === lights[name].id);
   if (!light) {
-    throw Error(`No light on found network with id ${lights[name]}`);
+    throw Error(`No light on found network with id ${lights[name].id}`);
   }
 
   (light as LightWithConfig).config = lights[name];
@@ -51,7 +51,6 @@ const getLight = (clients:Client[], name:string):LightWithConfig => {
 };
 
 const main = async () => {
-  const clients = await Discovery.scan();
   const mqttClient = connect(`mqtt://${MQTT_USERNAME}:${MQTT_PASSWORD}@${MQTT_HOST}`);
   mqttClient.on('connect', () => {
     console.log('connected to MQTT');
@@ -70,6 +69,7 @@ const main = async () => {
   });
 
   mqttClient.on('message', async (topic, message) => {
+    const clients = await Discovery.scan();
     const msg = message.toString();
     console.log({ msg, topic });
     const lightName = topic.split('/')[1];
