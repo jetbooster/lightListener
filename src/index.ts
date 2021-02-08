@@ -51,6 +51,9 @@ const getLight = (clients:Client[], name:string):LightWithConfig => {
 };
 
 const main = async () => {
+  const disc = await new Discovery();
+  await disc.scan();
+  setInterval(() => { console.log('Refreshing clients'); disc.scan(); }, 1000 * 60);
   const mqttClient = connect(`mqtt://${MQTT_USERNAME}:${MQTT_PASSWORD}@${MQTT_HOST}`);
   mqttClient.on('connect', () => {
     console.log('connected to MQTT');
@@ -69,11 +72,10 @@ const main = async () => {
   });
 
   mqttClient.on('message', async (topic, message) => {
-    const clients = await Discovery.scan();
     const msg = message.toString();
     console.log({ msg, topic });
     const lightName = topic.split('/')[1];
-    const lightConfig = getLight(clients, lightName);
+    const lightConfig = getLight(disc.clients, lightName);
     const light = new Control(lightConfig.address, { command_timeout: null });
     if (lightConfig.config) {
       if (lightConfig.config.type === 'mono') {
